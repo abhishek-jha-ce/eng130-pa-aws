@@ -44,4 +44,15 @@ Health Checks are crucial for Load Balancers. They enable the load balancer to k
 - Network Load Balancer (2017) - Supports `tcp`, `tls`, `udp`.
 - Gateway Load Balancer (2020) - Operates at Layer 3 (Network Layer).
 
-Load balancers can be setup as *internal*(private) or *external*(public).
+Load balancers can be setup as *internal*(private) or *external*(public). 
+
+### Accessing Resources
+To access the server (EC2 Instance) using load balancer:
+- Allow traffic from anywhere to the `load balancer`.
+- Allow traffic from **only** the `load balancer` to the `EC2 Instance`.
+- This can be achieved by allowing `Port 80` access to the security group of the `load balancer` in the security group of the instance.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/110366380/206431846-efd8e185-7e4e-42a9-9807-df88317085f6.png">
+</p>
+
