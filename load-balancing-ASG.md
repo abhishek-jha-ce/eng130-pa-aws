@@ -269,3 +269,17 @@ Auto Scaling attributes:
 - Health check screenshot:
 ![image](https://user-images.githubusercontent.com/110366380/206518097-3eb5f6e4-acac-48fb-83b1-e395e17ded14.png)
 - Click next to configure group size and scaling policies.
+
+### ASG - Scaling Policy
+
+- Manual Scaling
+- Schedule Scaling
+- Dynamic Scaling
+A dynamic scaling policy instructs Amazon EC2 Auto Scaling to track a specific CloudWatch metric, and it defines what action to take when the associated CloudWatch alarm is in ALARM.
+- Predective Scaling
+
+
+- Target Tracking Scaling
+- Simple/Step Scaling
+- Scheduled Actions
+- 
