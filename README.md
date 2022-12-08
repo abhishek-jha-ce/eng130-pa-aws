@@ -153,3 +153,51 @@ We can enable it by clicking on `edit` and enable it.
 
 - It is **disabled** by default for `Classic Load Balancer`. **No charges** incurred for inter AZ data transfer.
 
+## SSL Certificates
+
+- SSL refers to **Secure Sockets Layer**. It allows traffic between the user and load balancer to be encrypted in transit (aka in-flight encryption).
+- It has a newer version called `TLS`, which stands for **Transport Layer Security**. It is mostly used nowadays.
+- Public SSL certificates are issued by *Certificate Authority (CA)* like Comodo, Synamtec, GoDaddy, GlobalSign etc.
+- SSL Certificates have an expiration date and must be renewed.
+
+## Load Balancer - SSL Certificates
+
+![image](https://user-images.githubusercontent.com/110366380/206484228-8f25f8f9-a5fd-4d6e-a7b8-df45ae9379ba.png)
+
+- The load balancer uses an `X.509` certificate (SSL/TLS server certificate).
+- We can manage certificates using ACM (AWS Certificate Manager).
+- We can also create or upload our own certificates.
+
+### HTTPS Listener:
+A listener is a process that checks for connection requests, using the protocol and port that we configure. The rules that we define for a listener determine how the load balancer routes requests to its registered targets.
+- We must specify a default certificate.
+- We can alos add an optional list of certificates to support multiple domains.
+- Users can use SNI (Server Name Indication) to specify the hostname they reach.
+- We can also specify a security policy to support older versions of SSL/TLS for legacy clients.
+
+### SNI - Server Name Indication
+Server Name Indication (SNI) is an extension to the TLS protocol that is supported by browsers and clients released after 2010.
+
+- It solves the problem of loading multiple SSL certificates in one web server, to server multiple websites.
+- It requires the client to indicate the hostname of the target server in the initial SSL handshake.
+- The server then find the correct certificate or return the default one.
+
+![image](https://user-images.githubusercontent.com/110366380/206487121-043c6513-605e-4dfc-a410-aae7121ba8a5.png)
+
+**Note**: It only works for `ALB` & `NLB` but not `CLB`. It also works with `CloudFront`.
+
+### Enable SSL Certificates
+
+To add/enable SSL Certificates:
+- Go to `Load Balancers`.
+- Click on `Add Listener`.
+
+![image](https://user-images.githubusercontent.com/110366380/206500092-e297c868-7b3b-4dc9-af5d-2095d210726f.png)
+
+- Select the `port`.
+- Select the `target group`.
+- Set the `security policy`.
+- Choose the `ACM` or where the certificate is from. We can also choose to import the certificate.
+- Click on `Add`
+
+
