@@ -39,10 +39,39 @@ Health Checks are crucial for Load Balancers. They enable the load balancer to k
 - If the response is not 200(OK), then the instance is unhealthy.
 
 ### Types of Load Balancer
-- Classic Load Balancer (2009) - Supports `http`, `https`, `tcp`, `SSL`. **Deprecated** but can still be used
-- Application Load Balancer (2016) - Supports `http`, `https`, `WebSocket`.
-- Network Load Balancer (2017) - Supports `tcp`, `tls`, `udp`.
-- Gateway Load Balancer (2020) - Operates at Layer 3 (Network Layer).
+#### **Classic Load Balancer** (2009) 
+- Supports `http`, `https`, `tcp`, `SSL`.
+- **Deprecated** The Classic Load Balancer is deprecated and will soon not be available in the AWS Console.
+  
+#### **Application Load Balancer (ALB)** (2016)
+
+- **Layer 7** load balancer (HTTP).
+- Load balancing to multiple HTTP applications across machines (target groups).
+- Load balancing to multiple applications on the same machine (containers).
+- Supports `http`, `https`, `WebSocket`.
+- Supports redirects (e.g from HTTP to HTTPS).
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/110366380/206438369-21ec66a1-e0f6-410c-9ad0-d87f1aa91776.png">
+</p>
+
+- We can have Routing tables to different target groups, for e.g.:
+  - Route based on `path` in URL (abc.com/users or abc.com/posts) 
+  - Route based on `hostname` in URL (one.abc.com or other.abc.com)
+  - Route based on `Query String`, (abc.com/users?id=123&order=true)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/110366380/206437836-0bdb50d7-5e4f-4671-8b54-eea796a5e695.png">
+</p>
+
+- It is great fit for micro services & container-based application (example: Docker & Amazon ECS).
+- It has a port mapping feature to redirect to a dynamic port in ECS.
+  
+#### Network Load Balancer (2017) 
+- Supports `tcp`, `tls`, `udp`.
+
+#### **Gateway Load Balancer** (2020)
+- Operates at Layer 3 (Network Layer).
 
 Load balancers can be setup as *internal*(private) or *external*(public). 
 
