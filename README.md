@@ -200,4 +200,18 @@ To add/enable SSL Certificates:
 - Choose the `ACM` or where the certificate is from. We can also choose to import the certificate.
 - Click on `Add`
 
+## Connection Draining
 
+Connection draining is a process that ensures that existing, in-progress requests are given time to complete when a EC2 instance (VM) is removed. 
+
+- It is called `Connection Draining` for **CLB**.
+- It is called `Deregistration Delay` for **ALB** & **NLB**.
+- It stops sending new requests to the EC2 instance which is de-registering.
+- It gives some time for the active requests to be completed while the instance is de-registering or marked unhealthy.
+- We can set the parameter for the de-registering between 1 to 3600 seconds (1 Hour), Default is 300 Seconds.
+- We can disable it altogether, we can set the value to 0.
+- It is a good idea to set a low value if the requests are short, else set it depending on the type of request.
+
+![image](https://user-images.githubusercontent.com/110366380/206509384-263716c5-8efa-4fc5-a3dc-267bc5f7d6bf.png)
+
+# Auto Scaling Group
