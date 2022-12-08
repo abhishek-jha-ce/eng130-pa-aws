@@ -215,3 +215,57 @@ Connection draining is a process that ensures that existing, in-progress request
 ![image](https://user-images.githubusercontent.com/110366380/206509384-263716c5-8efa-4fc5-a3dc-267bc5f7d6bf.png)
 
 # Auto Scaling Group
+
+An Auto Scaling group contains a collection of EC2 instances that are treated as a logical grouping for the purposes of automatic scaling and management. An Auto Scaling group also lets us use Amazon EC2 Auto Scaling features such as health check replacements and scaling policies.
+<img align="right" src="https://user-images.githubusercontent.com/110366380/206510608-81ad9da1-9622-41d8-bbd7-211e93b517c8.png">
+The main Goal of `Auto Scaling Group` is:
+- Scale out to match the increased load.
+- Scale in to match a decreased load.
+- Ensure we have the minimum and a maximum number of EC2 instance.
+- Automatically register new instances to a load balancer.
+- Re-create an EC2 instance in case a previous one is terminated.
+- ASG are free - We only pay for the underlying EC2 instance.
+
+## Auto Scaling Group Attributes
+
+To set up a Auto Scaling Group, We setup a `Launch template`. Note: `Launch Configurations` are deprecated now. 
+
+The `Launch template` consists of (similar to creating an EC2 instance):
+- AMI
+- Instance Type
+- SSH Key Pair
+- Security Groups
+- EBS Volumes
+- EC2 User Data
+
+Auto Scaling attributes:
+- Network + Subnets Information
+
+- Load Balancer Information, Health checks and more
+
+- `Min Size`, `Max Size` and `Initial Capacity`.
+- Scaling Policies.
+
+- IAM Roles for EC2 Instances
+
+- It is possible to scale an ASG based on CloudWatch alarms.
+  - An alarm monitors a metric (Average CPU, or a custom metric).
+  - Based on the alarm, we can create scale-in (decrease the no of instances) or scale-out (increase the number of instances) policies.
+
+![image](https://user-images.githubusercontent.com/110366380/206514530-4241f6e4-abba-44c1-893c-6588f56315bc.png)
+
+## Creating an Auto Scaling Group
+
+- Click on `Auto Scaling Groups` then `New Auto Scaling Groups`.
+- Give the Name for the ASG.
+- Select the `Launch template`. If not already created one, click on `Create a launch template` and create one using the various attributes as metnioned above.
+- Refresh and Select the `Launch template`.
+- Click next for `instance launch options`. Select the VPC and Availability zones and subnets. 
+
+![image](https://user-images.githubusercontent.com/110366380/206517463-f2c0262f-e3ac-4562-94ca-c8b04411b72a.png)
+
+- Click next for advanced options like configuring `Load balancing` and `Health checks`
+![image](https://user-images.githubusercontent.com/110366380/206519732-df2f948a-9998-40c7-8f9d-786e8652a043.png)
+- Health check screenshot:
+![image](https://user-images.githubusercontent.com/110366380/206518097-3eb5f6e4-acac-48fb-83b1-e395e17ded14.png)
+- Click next to configure group size and scaling policies.
